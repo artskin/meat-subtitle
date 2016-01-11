@@ -3,8 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>操作</title>
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/screen.css">
 </head>
 <body>
-hello, world
+
+<h1>上传字幕 <small>*.srt</small></h1>
+<hr>
+
+<form id="upload-form">
+  <input type="file" name="file" id="file" class="hidden">
+  <div class="form-group">
+    <div class="drag-area">
+      <i class="fa fa-file-text-o fa-2x"></i>
+      请将文件拖到这里
+    </div>
+  </div>
+  <div class="form-group">
+    <label form="file">或者</label>
+    <label form="file" class="btn btn-primary btn-block">
+      <i class="fa fa-search"></i>
+      上传硬盘上的文件
+    </label>
+  </div>
+</form>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
