@@ -1,0 +1,27 @@
+{
+  "name": "meat-subtitle",
+  "homepage": "https://github.com/meathill/meat-subtitle",
+  "authors": [
+    "Meathill <meathill@gmail.com>"
+  ],
+  "description": "add subtitle for movies on youtube",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "chrome",
+    "extension",
+    "subtitle",
+    "youtube"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}

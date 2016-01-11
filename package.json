@@ -1,0 +1,24 @@
+{
+  "name": "meat-subtitle",
+  "version": "0.1.0",
+  "description": "Chrome 插件扩展，用于看 youtube 之类的加载外挂插件",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meathill/meat-subtitle.git"
+  },
+  "keywords": [
+    "chrome extension",
+    "subtitle",
+    "youtube"
+  ],
+  "author": "Meathill <meathill@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meathill/meat-subtitle/issues"
+  },
+  "homepage": "https://github.com/meathill/meat-subtitle#readme"
+}
