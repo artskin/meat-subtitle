@@ -8,3 +8,6 @@ bower_components
 .sass-cache
 css/*.css
 css/*.map
+
+# assets
+assets
