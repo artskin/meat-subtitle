@@ -4,5 +4,5 @@
 
 chrome.runtime.sendMessage({
   action: 'getPageContent',
-  source: document.body
+  body: document.body
 });
