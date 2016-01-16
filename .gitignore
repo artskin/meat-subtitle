@@ -3,11 +3,13 @@
 
 # repo
 bower_components
+node_modules
 
 # build
 .sass-cache
 css/*.css
 css/*.map
+js
 
 # assets
 assets

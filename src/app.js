@@ -1,6 +1,8 @@
 /**
  * Created by meathill on 16/1/11.
  */
+import Uploader from './framework/Uploader';
+
 var page;
 
 chrome.runtime.onMessage.addListener(function (request, sender) {
@@ -16,6 +18,6 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
 
 $(function () {
   chrome.tabs.executeScript(null, {
-    file: 'js/lookup-video.js'
+    file: 'src/lookup-video.src'
   });
 });
