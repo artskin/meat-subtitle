@@ -1,23 +1,25 @@
 /**
  * Created by meathill on 16/1/16.
  */
+var path = require('path');
 
 module.exports = {
   entry: './src/app.js',
   output: {
-    path: __dirname + '/js/',
+    path: __dirname + 'js/',
     filename: 'bundle.js'
   },
   module: {
     loaders: [
       {
-        test: '/\.css$/',
-        loader: 'style!css'
-      },
-      {
         test: '/\.js$/',
-        exclude: /node_module/,
-        loader: 'babel-loader'
+        exclude: /(node_module|bower_components|js)/,
+        include: path.join(__dirname, 'src'),
+        loader: 'babel',
+        query: {
+          presets: ['es2015'],
+          cacheDirectory: true
+        }
       }
     ]
   }

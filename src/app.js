@@ -3,21 +3,20 @@
  */
 import Uploader from './framework/Uploader';
 
-var page;
-
-chrome.runtime.onMessage.addListener(function (request, sender) {
+chrome.runtime.onMessage.addListener(function (request) {
   if (request.action === 'getPageContent') {
-    page = $(request.body);
+    let page = $(request.body);
+
+    let uploader = new Uploader('#upload-form');
 
     if (page.find('video').length === 0) {
-      $('.btn').addClass('disabled');
-      $('form').addClass('no-video');
+      uploader.disabled();
     }
   }
 });
 
 $(function () {
   chrome.tabs.executeScript(null, {
-    file: 'src/lookup-video.src'
+    file: 'js/lookup-video.js'
   });
 });

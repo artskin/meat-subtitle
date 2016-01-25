@@ -9,7 +9,8 @@ node_modules
 .sass-cache
 css/*.css
 css/*.map
-js
+js/bundle.js
+
 
 # assets
 assets
