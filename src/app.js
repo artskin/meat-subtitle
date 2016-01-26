@@ -7,10 +7,14 @@ chrome.runtime.onMessage.addListener(function (request) {
   if (request.action === 'getPageContent') {
     let page = $(request.body);
 
-    let uploader = new Uploader('#upload-form');
+    let uploader = new Uploader('#upload-form')
+      , video = page.find('video');
 
-    if (page.find('video').length === 0) {
+    if (video.length === 0) {
       uploader.disabled();
+    } else {
+      uploader.video = video;
+      uploader.start();
     }
   }
 });

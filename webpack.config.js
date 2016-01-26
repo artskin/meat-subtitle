@@ -4,17 +4,17 @@
 var path = require('path');
 
 module.exports = {
-  entry: './src/app.js',
+  context: path.join(__dirname, 'src'),
+  entry: './app',
   output: {
-    path: __dirname + 'js/',
+    path: path.join(__dirname, 'js'),
     filename: 'bundle.js'
   },
   module: {
     loaders: [
       {
-        test: '/\.js$/',
-        exclude: /(node_module|bower_components|js)/,
-        include: path.join(__dirname, 'src'),
+        test: /.js$/,
+        exclude: /node_modules/,
         loader: 'babel',
         query: {
           presets: ['es2015'],
