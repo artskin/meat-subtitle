@@ -3,6 +3,8 @@
  */
 'use strict';
 
+var _ = require('underscore');
+
 var events = {
   'change input': 'file_selectHandler'
 };
@@ -11,6 +13,7 @@ class Uploader {
   constructor(el) {
     this.el = el;
     this.$el = $(el);
+    this.fileField = this.$('[type=file]');
   }
   set video(value) {
     this._video = value;
@@ -23,10 +26,17 @@ class Uploader {
     this.$('label').addClass('disabled');
   }
   start() {
-    this._delegateEvents();
+    Uploader._delegateEvents();
+  }
+  file_selectHandler(event) {
+    let files = event.files;
+    if (files.length === 0) {
+      return;
+    }
+
   }
 
-  _delegateEvents() {
+  static _delegateEvents() {
     _.each(events, function (handler, event) {
       let arr = event.split(/\s+/)
         , selector = arr.length > 1 ? arr.slice(1).join(' ') : '';
