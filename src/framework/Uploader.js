@@ -24,9 +24,10 @@ class Uploader {
   disabled() {
     this.$('input, button').prop('disabled', true);
     this.$('label').addClass('disabled');
+    this.$el.addClass('no-video');
   }
   start() {
-    Uploader._delegateEvents();
+    this._delegateEvents();
   }
   file_selectHandler(event) {
     let files = event.files;
@@ -36,13 +37,13 @@ class Uploader {
 
   }
 
-  static _delegateEvents() {
+  _delegateEvents() {
     _.each(events, function (handler, event) {
       let arr = event.split(/\s+/)
         , selector = arr.length > 1 ? arr.slice(1).join(' ') : '';
       event = arr[0];
       this.$el.on(event, selector, this[handler].bind(this));
-    });
+    }, this);
   }
 }
 

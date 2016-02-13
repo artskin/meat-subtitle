@@ -25,5 +25,6 @@ module.exports = {
   },
   externals: {
     "underscore": "_"
-  }
+  },
+  devtool: 'source-map'
 };
