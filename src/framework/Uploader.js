@@ -1,9 +1,9 @@
 /**
  * Created by meathill on 16/1/14.
  */
-'use strict';
-
 var _ = require('underscore');
+
+import reader from '../tools/PromiseFileReader';
 
 var events = {
   'change input': 'file_selectHandler'
@@ -14,6 +14,10 @@ class Uploader {
     this.el = el;
     this.$el = $(el);
     this.fileField = this.$('[type=file]');
+    this._subtitles = {};
+  }
+  get subtitles() {
+    return this._subtitles;
   }
   set video(value) {
     this._video = value;
@@ -30,11 +34,33 @@ class Uploader {
     this._delegateEvents();
   }
   file_selectHandler(event) {
-    let files = event.files;
+    let files = event.target.files;
     if (files.length === 0) {
       return;
     }
-
+    let file = files[0];
+    var self = this;
+    reader(file)
+      .then(function (reader) {
+        return new Promise(function (resolve) {
+          chrome.tabs.query({
+            active: true,
+            currentWindow: true
+          }, function (tabs) {
+            let url = tabs[0].url
+              , value = {};
+            self.subtitles[url] = value[url] = reader.result;
+            chrome.storage.local.set(value, function () {
+              console.log('subtitle saved');
+              resolve();
+            });
+          });
+        })
+      })
+      .then(function () {
+        console.log('everything is done');
+        console.log(self.subtitles);
+      });
   }
 
   _delegateEvents() {
