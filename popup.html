@@ -10,32 +10,46 @@
 </head>
 <body>
 
-<h1>上传字幕 <small>*.srt</small></h1>
-<hr>
+<ul class="nav nav-tabs" role="tablist" id="main-nav">
+  <li role="presentation" class="active">
+    <a href="#upload-form" aria-controls="upload-form" role="tab" data-toggle="tab"><i class="fa fa-upload"></i> 上传字幕</a>
+  </li>
+  <li role="presentation">
+    <a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="fa fa-th-list"></i> 已有字幕</a>
+  </li>
+</ul>
 
-<form id="upload-form">
-  <input type="file" name="file" id="file" class="hidden" accept="*.srt">
-  <div class="form-group">
-    <div class="drag-area">
-      <i class="fa fa-file-text-o fa-2x"></i>
-      请将文件拖到这里
+<div class="tab-content">
+  <form role="tabpanel" class="tab-pane active" id="upload-form">
+    <input type="file" name="file" id="file" class="hidden" accept="*.srt">
+    <div class="form-group">
+      <div class="drag-area">
+        <i class="fa fa-file-text-o fa-2x"></i>
+        <p>*.srt</p>
+        请将文件拖到这里
+      </div>
     </div>
+    <div class="form-group">
+      <p>或者</p>
+      <label for="file" class="btn btn-primary btn-block">
+        <i class="fa fa-search"></i>
+        上传硬盘上的文件
+      </label>
+    </div>
+    <div class="no-video-cover">
+      该页面没有视频,无法使用字幕
+    </div>
+  </form>
+  <div role="tabpanel" class="tab-pane" id="list">
+
   </div>
-  <div class="form-group">
-    <p>或者</p>
-    <label for="file" class="btn btn-primary btn-block">
-      <i class="fa fa-search"></i>
-      上传硬盘上的文件
-    </label>
-  </div>
-  <div class="no-video-cover">
-    该页面没有视频,无法使用字幕
-  </div>
-</form>
+</div>
+
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/underscore/underscore-min.js"></script>
-<script src="js/bundle.js"></script>
+<script src="bower_components/backbone/backbone-min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

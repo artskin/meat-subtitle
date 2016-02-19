@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener(function (request) {
 
 $(function () {
   chrome.tabs.executeScript(null, {
-    file: 'js/lookup-video.js'
+    file: 'js/injector.js'
   });
 });
 

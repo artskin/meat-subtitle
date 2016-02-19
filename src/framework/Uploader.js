@@ -50,12 +50,17 @@ class Uploader {
             let url = tabs[0].url
               , value = {};
             self.subtitles[url] = value[url] = reader.result;
-            chrome.storage.local.set(value, function () {
-              console.log('subtitle saved');
-              resolve();
-            });
+            resolve(value);
           });
         })
+      })
+      .then(function (value) {
+        return new Promise(function (resolve) {
+          chrome.storage.local.set(value, function () {
+            console.log('subtitle saved');
+            resolve();
+          });
+        });
       })
       .then(function () {
         console.log('everything is done');
