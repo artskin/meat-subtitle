@@ -3,9 +3,12 @@
  */
 'use strict';
 
+var video = document.getElementsByTagName('video');
+
 chrome.runtime.sendMessage({
   action: 'getPageContent',
-  body: document.body.innerHTML
+  url: location.href,
+  hasVideo: !!video
 });
 
 chrome.runtime.onMessage.addListener(function (request) {

@@ -26,7 +26,9 @@ module.exports = {
     ]
   },
   externals: {
-    "underscore": "_"
+    "underscore": "_",
+    "backbone": "Backbone",
+    "jquery": "$"
   },
   devtool: 'source-map'
 };

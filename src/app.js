@@ -2,20 +2,29 @@
  * Created by meathill on 16/1/11.
  */
 import Uploader from './framework/Uploader';
+import List from './framework/List';
+import Local from './model/Local';
 import config from './config';
 
 chrome.runtime.onMessage.addListener(function (request) {
   if (request.action === 'getPageContent') {
-    let page = $(request.body);
+    let local = new Local(request.url)
+      , uploader = new Uploader({
+        el: '#upload-form',
+        collection: local
+      })
+      , list = new List({
+        el: '#list',
+        collection: local
+      });
 
-    let uploader = new Uploader('#upload-form')
-      , video = page.find('video');
+    local.on('reset', list.render, list);
 
-    if (video.length === 0) {
-      uploader.disabled();
-    } else {
+    if (response.hasVideo) {
       uploader.video = video;
       uploader.start();
+    } else {
+      uploader.disabled();
     }
   }
 });
