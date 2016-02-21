@@ -43,7 +43,10 @@
   <div role="tabpanel" class="tab-pane" id="list">
     <ul>
       <script type="text/x-handlebars-template">
-        <li>{{filename}}</li>
+        <li id="{{id}}">
+          <input type="checkbox" id="item-{{id}}">
+          <label for="item-{{id}}">{{filename}}</label>
+        </li>
       </script>
     </ul>
   </div>
@@ -54,6 +57,8 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/underscore/underscore-min.js"></script>
 <script src="bower_components/backbone/backbone-min.js"></script>
+<script src="bower_components/handlebars/handlebars.js"></script>
+<script src="bower_components/SparkMD5/spark-md5.min.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

@@ -18,12 +18,7 @@ chrome.runtime.onMessage.addListener(function (request) {
         collection: local
       });
 
-    local.on('reset', list.render, list);
-
-    if (response.hasVideo) {
-      uploader.video = video;
-      uploader.start();
-    } else {
+    if (!request.hasVideo) {
       uploader.disabled();
     }
   }

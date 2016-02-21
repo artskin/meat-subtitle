@@ -4,6 +4,7 @@
 import * as _ from 'underscore';
 import * as Backbone from 'backbone';
 import reader from '../tools/PromiseFileReader';
+import SparkMD5 from 'SparkMD5';
 
 class Uploader extends Backbone.View {
   constructor(init) {
@@ -29,12 +30,18 @@ class Uploader extends Backbone.View {
     var collection = this.collection;
     reader(file)
       .then(function (reader) {
-        if (collection.contains(reader.md5)) {
+        let spark = new SparkMD5.ArrayBuffer();
+        spark.append(reader.result);
+        let md5 = spark.end(false);
+        if (collection.contains(md5)) {
           return;
         }
-        collection.add(reader);
-        chrome.storage.local.set(collection.toJSON(), function () {
-          console.log('subtitle saved');
+        collection.add({
+          id: md5,
+          filename: file.name,
+          content: reader.result
+        }, {
+          immediately: true
         });
       });
   }

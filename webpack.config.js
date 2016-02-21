@@ -28,7 +28,9 @@ module.exports = {
   externals: {
     "underscore": "_",
     "backbone": "Backbone",
-    "jquery": "$"
+    "jquery": "$",
+    "SparkMD5": "SparkMD5",
+    "handlebars": "Handlebars"
   },
   devtool: 'source-map'
 };

@@ -3,20 +3,37 @@
  */
 import * as Backbone from 'backbone';
 
-class Local extends Backbone.View {
+class Local extends Backbone.Collection {
   constructor(url) {
     super();
 
     this.fetch(url);
+    this.on('add', this.addHandler, this);
+    this.on('remove', this.removeHandler, this);
   }
   fetch(url) {
     this._url = url;
     chrome.storage.local.get(url, function (items) {
-      this.set(items);
-    });
+      if (_.isArray(items)) {
+        this.set(items);
+      }
+    }.bind(this));
   }
   get url() {
     return this._url;
+  }
+  save() {
+    let storage = {};
+    storage[this.url] = this.toJSON();
+    chrome.storage.local.set(storage, function () {
+      console.log('subtitle saved');
+    });
+  }
+  addHandler() {
+    this.save();
+  }
+  removeHandler() {
+    this.save();
   }
 }
 
