@@ -14,8 +14,9 @@ class Local extends Backbone.Collection {
   fetch(url) {
     this._url = url;
     chrome.storage.local.get(url, function (items) {
-      if (_.isArray(items)) {
-        this.set(items);
+      if (_.isArray(items[url])) {
+        this.set(items[url]);
+        this.trigger('reset');
       }
     }.bind(this));
   }

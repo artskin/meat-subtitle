@@ -5,6 +5,7 @@ import * as Backbone from 'backbone';
 import * as $ from 'jquery';
 import * as _ from 'underscore';
 import * as Handlebars from 'handlebars';
+import template from '../template/list';
 
 class List extends Backbone.View {
   constructor(init) {
@@ -12,7 +13,7 @@ class List extends Backbone.View {
 
     this._fragment = '';
     this.container = this.$('ul');
-    this.template = Handlebars.compile(this.$('script').html());
+    this.template = template;
     this.collection.on('add', this.collection_addHandler, this);
     this.collection.on('remove', this.collection_removeHandler, this);
     this.collection.on('reset', this.collection_resetHandler, this);
@@ -24,7 +25,7 @@ class List extends Backbone.View {
    * @param [options] object 附加参数
    * @param [options.immediately] Boolean 是否立刻插入列表
    */
-  collection_addHandler(model, options) {
+  collection_addHandler(model, collection, options) {
     this._fragment += this.template(model.toJSON());
     if (options.immediately) {
       this.container.append(this._fragment);

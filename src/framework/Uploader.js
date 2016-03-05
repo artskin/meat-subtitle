@@ -33,7 +33,7 @@ class Uploader extends Backbone.View {
         let spark = new SparkMD5.ArrayBuffer();
         spark.append(reader.result);
         let md5 = spark.end(false);
-        if (collection.contains(md5)) {
+        if (collection.get(md5)) {
           return;
         }
         collection.add({

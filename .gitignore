@@ -10,6 +10,7 @@ node_modules
 css/*.css
 css/*.map
 js/
+src/template/
 
 # assets
 assets

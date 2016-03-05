@@ -4,17 +4,20 @@
 'use strict';
 
 var gulp = require('gulp')
+  , gUtil = require('gulp-util')
   , handlebars = require('gulp-handlebars')
   , wrap = require('gulp-wrap')
   , declare = require('gulp-declare')
   , fs = require('fs')
   , vinylBuffer = require('vinyl-buffer')
   , source = require('vinyl-source-stream')
+  , runSequence = require('run-sequence')
   , _ = require('underscore')
+  , webpack = require('webpack')
   , script_reg = /<script([^>]*)>([\S\s]+?)<\/script>/g;
 
 gulp.task('templates', function () {
-  let promise = new Promise(function (resolve, reject) {
+  let promise = new Promise( (resolve, reject) => {
     fs.readFile('popup.html', { encoding: 'utf-8'}, (err, data) => {
       if (err) {
         reject(err);
@@ -22,10 +25,10 @@ gulp.task('templates', function () {
       resolve(data);
     });
   });
-  return promise.then(function (content) {
-    content.replace(script_reg, function (match, attr, template) {
+  return promise.then( (content) => {
+    content.replace(script_reg, (match, attr, template) => {
       attr = _.chain(attr.split(' '))
-        .map(function (item) {
+        .map( (item) => {
           let pair = item.split('=');
           if (pair.length === 1) {
             pair[1] = true;
@@ -44,9 +47,32 @@ gulp.task('templates', function () {
         });
         stream
           .pipe(vinylBuffer())
-          .pipe(gulp.dest('js'));
+          .pipe(handlebars())
+          .pipe(wrap('let ' + attr['data-name'] + ' = Handlebars.template(<%= contents %>);\n' +
+            'export default ' + attr['data-name'] + ';'))
+          .pipe(gulp.dest('src/template'));
       }
       return '';
     });
   });
+});
+
+gulp.task('webpack', function (callback) {
+  webpack({
+
+  }, function (err, stats) {
+    if (err) {
+      throw new gUtil.PluginError('webpack', err);
+    }
+    gUtil.log('[webpack]', stats.toString());
+    callback();
+  })
+});
+
+gulp.task('default', function (taskDone) {
+  runSequence(
+    'templates',
+    'webpack',
+    taskDone
+  );
 });
