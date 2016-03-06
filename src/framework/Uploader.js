@@ -36,10 +36,13 @@ class Uploader extends Backbone.View {
         if (collection.get(md5)) {
           return;
         }
+        let isActive = collection.length === 1;
         collection.add({
           id: md5,
           filename: file.name,
-          content: reader.result
+          size: file.size,
+          content: reader.result,
+          active: isActive
         }, {
           immediately: true
         });

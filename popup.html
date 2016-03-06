@@ -41,11 +41,11 @@
     </div>
   </form>
   <div role="tabpanel" class="tab-pane" id="list">
-    <ul>
+    <ul class="list-group">
       <script type="text/x-handlebars-template" data-name="list">
-        <li id="{{id}}">
-          <input type="checkbox" id="item-{{id}}">
-          <label for="item-{{id}}">{{filename}}</label>
+        <li class="list-group-item {{#if active}}active{{/if}}" id="{{id}}">
+          <span class="badge">{{fileSize size}}</span>
+          {{filename}}
         </li>
       </script>
     </ul>

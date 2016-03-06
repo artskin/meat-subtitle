@@ -5,6 +5,7 @@ import Uploader from './framework/Uploader';
 import List from './framework/List';
 import Local from './model/Local';
 import config from './config';
+import fileSize from './tools/HandlebarsHelper';
 
 chrome.runtime.onMessage.addListener(function (request) {
   if (request.action === 'getPageContent') {
