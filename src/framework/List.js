@@ -9,7 +9,11 @@ import template from '../template/list';
 
 class List extends Backbone.View {
   constructor(init) {
-    super(init);
+    super(_.extend(init, {
+      events: {
+        'click list-group-item': 'clickHandler'
+      }
+    }));
 
     this._fragment = '';
     this.container = this.$('ul');
@@ -17,6 +21,7 @@ class List extends Backbone.View {
     this.collection.on('add', this.collection_addHandler, this);
     this.collection.on('remove', this.collection_removeHandler, this);
     this.collection.on('reset', this.collection_resetHandler, this);
+    this.collection.on('change', this.collection_changeHandler, this);
   }
 
   /**
@@ -32,6 +37,9 @@ class List extends Backbone.View {
       this._fragment = '';
     }
   }
+  collection_changeHandler(model) {
+    this.$('#' + model.id).replaceWith(this.template(model.toJSON()));
+  }
   collection_removeHandler(model) {
     let item = document.getElementById(model.id);
     $(item).remove();
@@ -39,6 +47,14 @@ class List extends Backbone.View {
   collection_resetHandler() {
     this.container.html(this._fragment);
     this._fragment = '';
+  }
+  clickHandler(event) {
+    let target = $(event.currentTarget)
+      , id = event.currentTarget.id;
+    if (target.hasClass('active')) {
+      return;
+    }
+    this.collection.get(id).set('active', true);
   }
 }
 

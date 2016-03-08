@@ -9,6 +9,7 @@ class Local extends Backbone.Collection {
 
     this.fetch(url);
     this.on('add', this.addHandler, this);
+    this.on('change', this.changeHandler, this);
     this.on('remove', this.removeHandler, this);
   }
   fetch(url) {
@@ -31,6 +32,12 @@ class Local extends Backbone.Collection {
     });
   }
   addHandler() {
+    this.save();
+  }
+  changeHandler(curr) {
+    this.find(function (model) {
+      return model.get('active') && model != curr;
+    }).set('active', false);
     this.save();
   }
   removeHandler() {
