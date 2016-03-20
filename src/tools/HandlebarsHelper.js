@@ -2,7 +2,7 @@
  * Created by meathill on 16/3/7.
  */
 
-import Handlebars from 'handlebars';
+import * as Handlebars from 'handlebars';
 
 function fileSize(value) {
   let count = 0

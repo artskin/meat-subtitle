@@ -39,6 +39,10 @@ class Local extends Backbone.Collection {
       return model.get('active') && model != curr;
     }).set('active', false);
     this.save();
+    chrome.runtime.sendMessage({
+      action: 'selected',
+      model: curr.toJSON()
+    });
   }
   removeHandler() {
     this.save();
